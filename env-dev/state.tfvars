@@ -1,3 +1,3 @@
 bucket = "phani997"
-key    = "roboshop-infra/dev/terraform.tfstate"
+key    = "roboshop-infra/dev/"
 region = "us-east-1"
