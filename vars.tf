@@ -1,1 +1,1 @@
-variable "network" {}
+variable "vpc" {}
