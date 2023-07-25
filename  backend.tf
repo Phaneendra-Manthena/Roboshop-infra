@@ -1,4 +1,4 @@
-terraform {
-  backend "local" {}
-}
-#provider "aws" {}
+#terraform {
+#  backend "s3" {}
+#}
+provider "aws" {}
