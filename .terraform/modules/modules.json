@@ -1,1 +1,0 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"network","Source":"git::https://github.com/Phaneendra-Manthena/tf-module-vpc.git","Dir":".terraform/modules/network"},{"Key":"vpc","Source":"git::https://github.com/Phaneendra-Manthena/tf-module-vpc.git","Dir":".terraform/modules/vpc"}]}
