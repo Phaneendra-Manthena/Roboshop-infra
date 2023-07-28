@@ -9,3 +9,13 @@ module "vpc" {
   availability_zone = each.value.availability_zone
   name              = each.key
 }
+
+#module "docdb" {
+#  source = "https://github.com/Phaneendra-Manthena/tf-module-docdb.git"
+#  env = var.env
+#  subnet_ids =
+#}
+
+output "vpc" {
+  value = module.vpc
+}
