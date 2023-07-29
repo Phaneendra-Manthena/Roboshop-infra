@@ -79,10 +79,34 @@ alb = {
     vpc_name = "main"
     subnets_type = "public_subnet_ids"      # public_subnet_ids name is referred from output name in module vpc
     subnets_name = "public"
+    internal     = false
   }
   private = {
     vpc_name = "main"
     subnets_type = "private_subnet_ids"     # private_subnet_ids name is referred from output name in module vpc
     subnets_name = "app"
+    internal     = true
+  }
+}
+
+apps = {
+  frontend = {
+    component = "frontend"
+    vpc_name = "main"
+    subnets_name = "private_subnets_ids"
+    subnets_name = "web"
+    app_port = 80
+
+
+
+  }
+  catalogue = {
+    component = "catalogue"
+    vpc_name = "main"
+    subnets_name = "private_subnets_ids"
+    subnets_name = "app"
+    app_port = 8080
+
+
   }
 }
