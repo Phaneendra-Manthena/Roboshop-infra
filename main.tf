@@ -1,6 +1,6 @@
 module "vpc" {
-  source            = "github.com/Phaneendra-Manthena/tf-module-vpc"
-  env               = var.env
+  source = "github.com/Phaneendra-Manthena/tf-module-vpc"
+  env    = var.env
 
   default_vpc_id    = var.default_vpc_id
   for_each          = var.vpc
@@ -12,8 +12,8 @@ module "vpc" {
 }
 
 module "docdb" {
-  source              = "github.com/Phaneendra-Manthena/tf-module-docdb.git"
-  env                 = var.env
+  source = "github.com/Phaneendra-Manthena/tf-module-docdb.git"
+  env    = var.env
 
   for_each            = var.docdb
   subnet_ids          = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), "private_subnet_ids", null), each.value.subnets_name, null), "subnet_ids", null)
@@ -25,15 +25,15 @@ module "docdb" {
 }
 
 module "rds" {
-  source              = "github.com/Phaneendra-Manthena/tf-module-rds.git"
-  env                 = var.env
+  source = "github.com/Phaneendra-Manthena/tf-module-rds.git"
+  env    = var.env
 
   for_each            = var.rds
   subnet_ids          = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), "private_subnet_ids", null), each.value.subnets_name, null), "subnet_ids", null)
   vpc_id              = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
   allow_cidr          = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
-  engine      = each.value.engine
-  engine_version = each.value.engine_version
+  engine              = each.value.engine
+  engine_version      = each.value.engine_version
   number_of_instances = each.value.number_of_instances
   instance_class      = each.value.instance_class
 
@@ -41,7 +41,7 @@ module "rds" {
 
 module "elasticache" {
   source = "github.com/Phaneendra-Manthena/tf-module-elasticcache.git"
-  env = var.env
+  env    = var.env
 
   for_each        = var.elasticache
   subnet_ids      = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), "private_subnet_ids", null), each.value.subnets_name, null), "subnet_ids", null)
@@ -54,41 +54,41 @@ module "elasticache" {
 
 module "rabbitmq" {
   source = "github.com/Phaneendra-Manthena/tf-module-rabbitmq.git"
-  env = var.env
+  env    = var.env
 
-  for_each        = var.rabbitmq
-  subnet_ids      = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), "private_subnet_ids", null), each.value.subnets_name, null), "subnet_ids", null)
-  vpc_id          = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
-  allow_cidr      = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
-  engine_type = each.value.engine_type
-  engine_version = each.value.engine_version
+  for_each           = var.rabbitmq
+  subnet_ids         = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), "private_subnet_ids", null), each.value.subnets_name, null), "subnet_ids", null)
+  vpc_id             = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+  allow_cidr         = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
+  engine_type        = each.value.engine_type
+  engine_version     = each.value.engine_version
   host_instance_type = each.value.host_instance_type
-  deployment_mode = each.value.deployment_mode
+  deployment_mode    = each.value.deployment_mode
 }
 
 module "alb" {
   source = "github.com/Phaneendra-Manthena/tf-module-alb.git"
-  env = var.env
+  env    = var.env
 
-  for_each        = var.alb
-  subnet_ids      = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
-  vpc_id          = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
-  allow_cidr      = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
+  for_each     = var.alb
+  subnet_ids   = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
+  vpc_id       = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+  allow_cidr   = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
   subnets_name = each.value.subnets_name
-  internal = each.value.internal
+  internal     = each.value.internal
 
 }
 
 module "apps" {
   source = "github.com/Phaneendra-Manthena/tf-module-app.git"
-  env = var.env
+  env    = var.env
 
-  for_each        = var.alb
-  subnet_ids      = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
-  vpc_id          = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
-  allow_cidr      = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
-  component = each.value.component
-  app_port = each.value.app_port
+  for_each   = var.alb
+  subnet_ids = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
+  vpc_id     = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
+  allow_cidr = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
+  component  = each.value.component
+  app_port   = each.value.app_port
 }
 #output "vpc" {
 #  value = module.vpc
