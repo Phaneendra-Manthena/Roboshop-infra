@@ -1,0 +1,32 @@
+
+[frontend]
+10.172.0.4   ansible_user=centos ansible_password=DevOps321
+
+
+[catalogue]
+10.180.0.2    ansible_user=centos ansible_password=DevOps321
+
+
+[mongodb]
+10.180.0.3    ansible_user=centos ansible_password=DevOps321
+
+[redis]
+10.168.0.3    ansible_user=centos ansible_password=DevOps321
+
+[user]
+10.132.0.2    ansible_user=centos ansible_password=DevOps321
+
+[cart]
+10.132.0.3    ansible_user=centos ansible_password=DevOps321
+
+[mysql]
+10.172.0.2    ansible_user=centos ansible_password=DevOps321
+
+[shipping]
+10.172.0.3    ansible_user=centos ansible_password=DevOps321
+
+[rabbitmq]
+10.200.0.3    ansible_user=centos ansible_password=DevOps321
+
+[payment]
+10.132.0.4    ansible_user=centos ansible_password=DevOps321
