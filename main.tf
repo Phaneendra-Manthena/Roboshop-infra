@@ -32,7 +32,7 @@ module "rds" {
   engine      = each.value.engine
   engine_version = each.value.engine_version
   number_of_instances = each.value.number_of_instances
-#  instance_class      = each.value.instance_class
+  instance_class      = each.value.instance_class
 
 }
 
