@@ -83,11 +83,11 @@ module "apps" {
   source = "github.com/Phaneendra-Manthena/tf-module-app.git"
   env    = var.env
 
-  for_each   = var.alb
+  for_each   = var.apps
   subnet_ids = lookup(lookup(lookup(lookup(module.vpc, each.value.vpc_name, null), each.value.subnets_type, null), each.value.subnets_name, null), "subnet_ids", null)
   vpc_id     = lookup(lookup(module.vpc, each.value.vpc_name, null), "vpc_id", null)
   allow_cidr = lookup(lookup(lookup(lookup(var.vpc, each.value.vpc_name, null), "private_subnets", null), "app", null), "cidr_block", null)
-  component  = each.value.component
+  component = each.value.component
   app_port  = each.value.app_port
 }
 #output "vpc" {
