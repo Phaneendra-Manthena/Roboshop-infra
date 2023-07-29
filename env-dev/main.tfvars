@@ -73,3 +73,16 @@ rabbitmq = {
     deployment_mode = "SINGLE_INSTANCE"
   }
 }
+
+alb = {
+  public = {
+    vpc_name = "main"
+    subnets_type = "public_subnet_ids"      # public_subnet_ids name is referred from output name in module vpc
+    subnets_name = "public"
+  }
+  private = {
+    vpc_name = "main"
+    subnets_type = "private_subnet_ids"     # private_subnet_ids name is referred from output name in module vpc
+    subnets_name = "app"
+  }
+}
