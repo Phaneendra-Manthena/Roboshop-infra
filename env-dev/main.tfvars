@@ -93,7 +93,7 @@ apps = {
   frontend = {
     component    = "frontend"
     vpc_name     = "main"
-    subnets_name = "private_subnets_ids"
+    subnets_type = "private_subnets_ids"
     subnets_name = "web"
     app_port     = 80
 
@@ -103,7 +103,7 @@ apps = {
   catalogue = {
     component    = "catalogue"
     vpc_name     = "main"
-    subnets_name = "private_subnets_ids"
+    subnets_type = "private_subnets_ids"
     subnets_name = "app"
     app_port     = 8080
 
