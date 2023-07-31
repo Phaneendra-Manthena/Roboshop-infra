@@ -168,7 +168,7 @@ apps = {
 
   }
 
-  payyment = {
+  payment = {
     component               = "payment"
     vpc_name                = "main"
     subnets_type            = "private_subnet_ids"
