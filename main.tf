@@ -98,4 +98,5 @@ module "apps" {
 }
 output "rds" {
   value = module.rds
+  sensitive = true
 }
