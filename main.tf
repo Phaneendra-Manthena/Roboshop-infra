@@ -96,6 +96,6 @@ module "apps" {
   instance_type    = each.value.instance_type
   bastion_cidr     = var.bastion_cidr
 }
-#output "vpc" {
-#  value = module.vpc
-#}
+output "vpc" {
+  value = module.elasticache
+}
