@@ -96,6 +96,10 @@ module "apps" {
   instance_type    = each.value.instance_type
   bastion_cidr     = var.bastion_cidr
 }
-output "rds" {
-  value = module.rds
-}
+
+
+
+
+#output "rds" {
+#  value = module.rds
+#}
